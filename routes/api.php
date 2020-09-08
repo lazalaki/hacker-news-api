@@ -18,9 +18,15 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-
-
-Route::group(['prefix' => 'auth'], function () {
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'auth'
+], function() {
     Route::post('register', 'Auth\AuthController@register')->name('auth.register');
     Route::post('login', 'Auth\AuthController@login');
+    Route::post('activate', 'Auth\AuthController@activateAccount')->name('email.verification');
 });
+
+// Route::group(['prefix' => 'auth'], function () {
+    
+// });

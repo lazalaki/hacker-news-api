@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Services\Auth\UserService;
+use App\Services\Email\EmailService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -18,11 +19,11 @@ class AuthController extends Controller
     }
 
 
-
     public function register(RegisterRequest $request)
     {
-        $credientals = $request->only('name', 'email', 'password', 'token');
-
+        
+        $credientals = $request->only('name', 'email', 'password');
+        
         return $this->userService->register($credientals);
     }
 
@@ -32,5 +33,11 @@ class AuthController extends Controller
         $credientals = $request->only('email', 'password');
 
         return $this->userService->login($credientals);
+    }
+
+
+    public function activateAccount(Request $token)
+    {
+        return $this->userService->activateAccount($token);
     }
 }

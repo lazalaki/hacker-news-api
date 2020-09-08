@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 
+Route::post('register', 'Auth\AuthController@register')->name('auth.register');
 
 
 
